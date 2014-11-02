@@ -99,7 +99,7 @@ void Model::generateCircleVertices(float* verticeArr, float center_location[NUM_
 	}
 
 	//calculating the vertices on the circle perimeter
-	for (int numTriangle = 1; numTriangle < DEGREES_IN_CIRCLE +1; numTriangle++)
+	for (int numTriangle = 1; numTriangle < DEGREES_IN_CIRCLE +2; numTriangle++)
 	{
 		for (int coordNum = X; coordNum < NUM_OF_COORDS; coordNum++)
 		{
@@ -120,7 +120,7 @@ void Model::draw()
 	GLuint program = programManager::sharedInstance().programWithID("default");
 	glUseProgram(program);
 
-	GLenum polygonMode = GL_LINE;   // Also try using GL_FILL and GL_POINT
+	GLenum polygonMode = GL_FILL;   // Also try using GL_FILL and GL_POINT
 	glPolygonMode(GL_FRONT_AND_BACK, polygonMode);
 
 	// Set uniform variable with RGB values:

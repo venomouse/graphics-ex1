@@ -18,7 +18,6 @@
 class Model {
 	
 	enum Coords {X=0, Y, Z, W, NUM_OF_COORDS};
-//	enum Triangle_Coords {FIRST_VERTICE_X, FIRST_VERTICE_Y,
 
 
 	GLuint _vao, _vbo;
