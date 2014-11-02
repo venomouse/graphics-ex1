@@ -19,7 +19,9 @@
 #include <glm/gtc/type_ptr.hpp>
 #include "glm/gtc/matrix_transform.hpp"
 
-#define SHADERS_DIR "shaders/"
+#define SHADERS_DIR                 "shaders/"
+#define DEGREES_IN_CIRCLE           360
+
 
 Model::Model() :
 _vao(0), _vbo(0)
@@ -34,6 +36,7 @@ Model::~Model()
 	if (_vbo != 0)
 		glDeleteBuffers(1, &_vbo);
 }
+
 
 void Model::init()
 {
@@ -50,12 +53,17 @@ void Model::init()
 	// Initialize vertices buffer and transfer it to OpenGL
 	{
 		// For this example we create a single triangle:
-		const float vertices[] = {
-			0.75f, 0.75f, 0.0f, 1.0f,
-			0.75f, -0.75f, 0.0f, 1.0f,
-			-0.75f, -0.75f, 0.0f, 1.0f,
+		float center[] = {
+			0.0f, 0.0f, 0.0f, 1.0f,
 		};
 		
+		float vertices[(DEGREES_IN_CIRCLE+2)*NUM_OF_COORDS];
+
+		float radius = 0.75;
+
+		generateCircleVertices(vertices, center, radius);
+
+
 		// Create and bind the object's Vertex Array Object:
 		glGenVertexArrays(1, &_vao);
 		glBindVertexArray(_vao);
@@ -82,6 +90,30 @@ void Model::init()
 	}
 }
 
+void Model::generateCircleVertices(float* verticeArr, float center_location[NUM_OF_COORDS], float radius)
+{
+	//initializing the center
+	for (int coordNum = X; coordNum < NUM_OF_COORDS; coordNum++)
+	{
+		verticeArr[coordNum] = center_location[coordNum];
+	}
+
+	//calculating the vertices on the circle perimeter
+	for (int numTriangle = 1; numTriangle < DEGREES_IN_CIRCLE +1; numTriangle++)
+	{
+		for (int coordNum = X; coordNum < NUM_OF_COORDS; coordNum++)
+		{
+			verticeArr[numTriangle*NUM_OF_COORDS + coordNum] = center_location[coordNum];
+		}
+
+		verticeArr[numTriangle*NUM_OF_COORDS + X] += radius*cos(numTriangle*M_PI/180.0f);
+		verticeArr[numTriangle*NUM_OF_COORDS + Y] += radius*sin(numTriangle*M_PI/180.0f);
+	}
+
+
+
+}
+
 void Model::draw()
 {
 	// Set the program to be used in subsequent lines:
@@ -98,8 +130,8 @@ void Model::draw()
 	// Draw using the state stored in the Vertex Array object:
 	glBindVertexArray(_vao);
 	
-	size_t numberOfVertices = 3;
-	glDrawArrays(GL_TRIANGLES, 0, numberOfVertices);
+	size_t numberOfVertices = DEGREES_IN_CIRCLE+2;
+	glDrawArrays(GL_TRIANGLE_FAN, 0, numberOfVertices);
 	
 	// Unbind the Vertex Array object
 	glBindVertexArray(0);

@@ -17,6 +17,10 @@
 
 class Model {
 	
+	enum Coords {X=0, Y, Z, W, NUM_OF_COORDS};
+//	enum Triangle_Coords {FIRST_VERTICE_X, FIRST_VERTICE_Y,
+
+
 	GLuint _vao, _vbo;
 
 	// Attribute handle:
@@ -43,6 +47,9 @@ public:
 public:
 	void resize(int width, int height);
 	
+private:
+	void generateCircleVertices(float* verticeArr, float center_location[NUM_OF_COORDS], float radius);
+
 };
 
 #endif /* defined(__ex0__Model__) */
