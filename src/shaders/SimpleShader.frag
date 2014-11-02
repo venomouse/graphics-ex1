@@ -4,15 +4,21 @@ uniform vec4 fillColor;
 
 out vec4 outColor;
 
-vec4 checker(vec4 FragCoord, int checkSize) {
-	if (( int(gl_FragCoord.x) % (2*checkSize) < checkSize && int(gl_FragCoord.y) % (2*checkSize) >= checkSize) ||
-                        (    int(gl_FragCoord.x) % (2*checkSize) >= checkSize && int(gl_FragCoord.y) % (2*checkSize) < checkSize) )
+
+//creates the checkered pattern 
+vec4 checker(vec4 fragCoord, int checkSize) {
+
+	if (( int(fragCoord.x) % (2*checkSize) < checkSize && int(fragCoord.y) % (2*checkSize) >= checkSize) ||
+                        (    int(fragCoord.x) % (2*checkSize) >= checkSize && int(fragCoord.y) % (2*checkSize) < checkSize) )
     {
+    	//blue checker
         return fillColor;
     }
+    
     else
     {
-        return fillColor* 0;
+    	//black checker
+        return vec4(0.0f,0.0f,0.0f,1.0f);
     }
 }
 

@@ -1,0 +1,8 @@
+
+
+
+
+URLs used during the exercise:
+http://en.wikibooks.org/wiki/OpenGL_Programming/Basics/2DObjects#Using_glBegin_with_GL_TRIANGLE_FAN
+https://www.opengl.org/sdk/docs/man3/xhtml/glDrawArrays.xml
+https://www.opengl.org/discussion_boards/showthread.php/140906-Drawing-Triangles-That-are-outlined-and-filled

@@ -28,6 +28,9 @@ class Model {
 	// Uniform handle:
 	GLint _fillColorUV;
 	
+	//Uniform:
+	GLint _checkerSize;
+
 	// View port frame:
 	float _width, _height, _offsetX, _offsetY;
 

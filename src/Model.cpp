@@ -120,7 +120,7 @@ void Model::draw()
 	GLuint program = programManager::sharedInstance().programWithID("default");
 	glUseProgram(program);
 
-	GLenum polygonMode = GL_FILL;   // Also try using GL_FILL and GL_POINT
+	GLenum polygonMode = GL_FILL;
 	glPolygonMode(GL_FRONT_AND_BACK, polygonMode);
 
 	// Set uniform variable with RGB values:
