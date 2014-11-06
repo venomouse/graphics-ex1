@@ -1,6 +1,38 @@
+322128083 smdyshel
 
+301117800 moshemandel
+
+Exercise description:
+---------------------
+We implemented the circle using GL_TRIANGLE_FAN object in glew library. This was done mainly to minimize the amount of data passed to OpenGL (hopefully, this is the pitfall mentioned).Therefore, appropriate changes were made to the Model::draw() function.
+
+As we are supposed to implement multiple circles in the part B, we implemented filling the vertices array for the circle in a separate fuction generateCircleVertices(), that is called from Model::init(), that receives the center location of the circle and its radius. Additionally, we made it possible to refine the resolution of the circle by defining the VERTICES_IN_PERIMETER parameter at the head of the file.
+
+To fill the whole shape with the checkered pattern, we changed the drawing mode from GL_LINE to GL_FILL.
+
+To create the chekered pattern, we modified the existing fragment shader. The idea behind the function that creates the pattern is to use mod function to create checkers of appropriate size. 
+
+Additional files: 
+-----------------
+No files were added to the supplied code.
+
+Files needed to compile the code (the makefile was not changed):
+ex0.cpp
+ex0.h
+Model.cpp
+Model.h
+ShaderIO.cpp
+ShaderIO.h
+Files needed to run the code:
+shaders/SimpleShader.vert
+shaders/SimpleShader.frag
+
+
+
+We discussed the exercise with noone.
 
 URLs used during the exercise:
+-------------------------------
 http://en.wikibooks.org/wiki/OpenGL_Programming/Basics/2DObjects#Using_glBegin_with_GL_TRIANGLE_FAN
 https://www.opengl.org/sdk/docs/man3/xhtml/glDrawArrays.xml
 https://www.opengl.org/discussion_boards/showthread.php/140906-Drawing-Triangles-That-are-outlined-and-filled

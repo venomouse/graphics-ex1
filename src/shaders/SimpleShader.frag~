@@ -1,6 +1,6 @@
 #version 330
 
-#define CHECKER_SIZE  10
+//#define CHECKER_SIZE  10
 uniform vec4 fillColor;
 
 out vec4 outColor;
@@ -9,6 +9,7 @@ out vec4 outColor;
 //creates the checkered pattern 
 vec4 checker(vec4 fragCoord) {
 
+    int CHECKER_SIZE = 10;
    	if (( int(fragCoord.x) % (2*CHECKER_SIZE) < CHECKER_SIZE && int(fragCoord.y) % (2*CHECKER_SIZE) >= CHECKER_SIZE) ||
                         (    int(fragCoord.x) % (2*CHECKER_SIZE) >= CHECKER_SIZE && int(fragCoord.y) % (2*CHECKER_SIZE) < CHECKER_SIZE) )
     {
