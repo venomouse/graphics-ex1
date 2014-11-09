@@ -15,6 +15,7 @@ EXEC =
 SRCS	=  	ex0.cpp		\
 		Model.cpp 	\
 		ShaderIO.cpp	\
+		Ball.cpp        \
 			
 # compiler 
 CC	= g++

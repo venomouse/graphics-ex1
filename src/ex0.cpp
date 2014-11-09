@@ -71,7 +71,7 @@ Model _model;
 int main(int argc, char* argv[])
 {
 	std::cout << "Starting ex0..." << std::endl;
-	
+
 	// Initialize GLUT
     glutInit(&argc, argv) ;
 #ifdef __APPLE__
@@ -109,6 +109,8 @@ int main(int argc, char* argv[])
 	
 	// Init anything that can be done once and for all:
 	_model.init();
+
+	g_duringAnimation = true;
 
 	// Set clear color to black:
 	glClearColor(0.0, 0.0, 0.0, 0.0);
@@ -206,15 +208,16 @@ void keyboard(unsigned char key, int x, int y)
  \******************************************************************/
 void mouse(int button, int state, int x, int y)
 {
-    if(button == GLUT_LEFT_BUTTON)
+   if(button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
     {
-		
+		_model.createRandomBall(x,y);
+		std::cout << "New ball created, x " << x << " y " << y << " button: " << button <<  std::endl;
     }
     else if (button == GLUT_RIGHT_BUTTON)
     {
         
     }
-    
+
     return;
 }
 
@@ -234,7 +237,7 @@ void motion(int x, int y)
     return;
 }
 
-static const float animationDurationInFrames = 300;
+static const float animationDurationInFrames = 30000;
 
 void timer(int value) {
     /* Set the timer to be called again in X milli - seconds. */
@@ -248,6 +251,7 @@ void timer(int value) {
     glutTimerFunc(25, timer, ++value);   // uint millis int value
     
     if (g_duringAnimation) {
+    	_model.move();
         float t = (float)value / (float)animationDurationInFrames;
         if (t > 1) {
             g_duringAnimation = false;

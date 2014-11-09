@@ -24,6 +24,6 @@ vec4 checker(vec4 fragCoord) {
 
 void main()
 {
-	outColor = checker(gl_FragCoord);
+	outColor = fillColor;
 }
 
