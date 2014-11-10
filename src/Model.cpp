@@ -19,7 +19,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include "glm/gtc/matrix_transform.hpp"
 
-#define SHADERS_DIR                 "shaders/"
+#define SHADERS_DIR                 "C:\\Users\\Maria\\Documents\\Visual Studio 2010\\Projects\\graphics-ex1\\src\\shaders\\"
 #define DEGREES_IN_CIRCLE           360
 #define VERTICES_IN_PERIMETER		DEGREES_IN_CIRCLE*1 //must be a factor of number of degrees in a full circle
 
