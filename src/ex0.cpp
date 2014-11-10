@@ -211,7 +211,7 @@ void mouse(int button, int state, int x, int y)
    if(button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
     {
 		_model.createRandomBall(x,y);
-		std::cout << "New ball created, x " << x << " y " << y << " button: " << button <<  std::endl;
+//		std::cout << "New ball created, x " << x << " y " << y << " button: " << button <<  std::endl;
     }
     else if (button == GLUT_RIGHT_BUTTON)
     {

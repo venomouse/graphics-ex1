@@ -31,8 +31,8 @@ Ball::~Ball()
 
 void Ball::init()
 {
-	_dx = 2*SPEED * (rand() % 10)/10.0 - SPEED;
-	_dy = 2*SPEED * (rand() % 10)/10.0 - SPEED;
+	_dx = SPEED * (rand() % 10)/10.0;
+	_dy = SPEED * (rand() % 10)/10.0;
 	_color[0] = (rand() % 255)/255.0;
 	_color[1] = (rand() % 255)/255.0;
 	_color[2] = (rand() % 255)/255.0;
@@ -41,15 +41,15 @@ void Ball::init()
 void Ball::move()
 {
 	if ((_x + _radius > 1.0) || (_x - _radius < -1.0))
-	{
-		_dx *= -1;
-	}
-	if ((_y - _radius < -1.0) || (_y + _radius > 1.0))
-	{
-		_dy *= -1;
-	}
-	_x += _dx;
-	_y += _dy;
+		{
+			_dx *= -1;
+		}
+		if ((_y - _radius < -1.0) || (_y + _radius > 1.0))
+		{
+			_dy *= -1;
+		}
+		_x += _dx;
+		_y += _dy;
 }
 
 void Ball::setRadius(float radius)

@@ -15,6 +15,7 @@
 #include <GL/gl.h>
 #include "Ball.h"
 #endif
+#include <math.h>
 
 #define MAX_NUM_BALLS 100
 
@@ -68,7 +69,8 @@ public:
 
 private:
 	void generateCircleVertices(float* verticeArr, float center_location[NUM_OF_COORDS], float radius);
-
+	float calculateDist(float x0, float y0, float x1, float y1);
+	bool isColliding(Ball ball1, Ball ball2);
 //private:
 //	void checkOverlapAndShrink()
 

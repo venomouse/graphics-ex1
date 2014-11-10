@@ -2,7 +2,7 @@
 
 layout(location = 2) in vec4 position;
 uniform vec4 translation;
-uniform float scale;
+uniform mat4 scale;
 
 
 void main()

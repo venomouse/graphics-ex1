@@ -121,6 +121,18 @@ void Model::generateCircleVertices(float* verticeArr, float center_location[NUM_
 
 }
 
+float Model::calculateDist(float x0, float y0, float x1, float y1)
+{
+	return sqrt((x0 - x1) * (x0 - x1) + (y0 - y1) * (y0 - y1) );
+}
+
+bool Model::isColliding(Ball ball1, Ball ball2)
+{
+	float r1 = ball1.getRadius();
+	float r2 = ball2.getRadius();
+	float dist = calculateDist(ball1.getX(), ball1.getY(), ball2.getX(), ball2.getY());
+	return (dist < r1 + r2);
+}
 
 void Model::draw()
 {
@@ -148,10 +160,14 @@ void Model::draw()
 	for (int i = 0; i < _numOfBalls; i++)
 	{
 		float scale = _balls[i].getRadius()/DEFAULT_RADIUS;
-		std::cout << " Ball " << i << " scale " << scale << " radius "  << _balls[i].getRadius() << std::endl;
-		glUniform4f(_fillColorUV, _balls[i].getColor()[0], _balls[i].getColor()[1], _balls[i].getColor()[0], 1.0);
+		float scaleMatrix[] = {scale, 0.0, 0.0, 0.0,
+		                     0.0, scale, 0.0, 0.0,
+		                     0.0, 0.0, 1.0, 0.0,
+		                     0.0, 0.0, 0.0, 1.0};
+//		std::cout << " Ball " << i << " scale " << scale << " radius "  << _balls[i].getRadius() << std::endl;
+		glUniform4f(_fillColorUV, _balls[i].getColor()[0], _balls[i].getColor()[1], _balls[i].getColor()[2], 1.0);
 		glUniform4f(_translationUV, _balls[i].getX(), _balls[i].getY(),0.0, 0.0);
-		glUniform1f(_scaleUV, scale);
+		glUniformMatrix4fv(_scaleUV, 1, false, scaleMatrix);
 
 		glDrawArrays(GL_TRIANGLE_FAN, 0, numberOfVertices);
 	}
