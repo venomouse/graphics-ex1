@@ -4,7 +4,7 @@ uniform vec2 windowSize;
 
 uniform vec4 fillColor[10];
 uniform float ballRadius[10];
-uniform vec2 centerOffset[10];
+uniform vec4 translation[10];
 
 flat in int InstanceID;
 out vec4 outColor;
@@ -13,7 +13,7 @@ void main()
 {
 	vec4 fillColorFrag = fillColor[InstanceID];
 	float ballRadiusFrag = ballRadius[InstanceID];
-	vec2 offset =  centerOffset[InstanceID];
+	vec2 offset = vec2(translation[InstanceID].x, translation[InstanceID].y);
 	
 	float gradientAlpha = 0.8;
 	vec4 lightColor = vec4(1.0f, 1.0f, 1.0f, 1.0f);
@@ -33,11 +33,11 @@ void main()
 	vec2 positionToGradientCenter = position - gradientCenter; //position w.r.t. gradient center
 	float distFromGradientCenter = sqrt(positionToGradientCenter.x*positionToGradientCenter.x 
 											+ positionToGradientCenter.y*positionToGradientCenter.y);
-	//float p = min(1,distFromGradientCenter/ballRadiusFrag);
+
 	float p = distFromGradientCenter/ballRadiusFrag;
 	outColor = (1-gradientAlpha)*fillColorFrag + gradientAlpha*(p*fillColorFrag +(1-p)*lightColor);
 	
-//	outColor = fillColorFrag;
+
 	
 }
 

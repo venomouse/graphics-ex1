@@ -38,20 +38,22 @@ void Ball::init()
 	_color[1] = (rand() % 255)/255.0;
 	_color[2] = (rand() % 255)/255.0;
 	_scale = 1.0f;
+	_gXscale = 1.0f;
+	_gYscale = 1.0f;
 }
 
 void Ball::move()
 {
-	if ((_x + _radius > 1.0) || (_x - _radius < -1.0))
+	if ((_x + _radius/_gXscale > 1.0) || (_x - _radius/_gXscale < -1.0))
 	{
 		_dx *= -1;
 	}
-	if ((_y - _radius < -1.0) || (_y + _radius > 1.0))
+	if ((_y - _radius/_gYscale < -1.0) || (_y + _radius/_gYscale > 1.0))
 	{
 		_dy *= -1;
 	}
-	_x += _dx;
-	_y += _dy;
+	_x += _dx/_gXscale;
+	_y += _dy/_gYscale;
 }
 
 
@@ -66,16 +68,10 @@ void Ball::enlarge()
 	_scale = std::min(1.0f, _scale+0.05f);
 }
 
-void Ball::calculateWhitePoint(float lightSourceX, float lightSourceY, float& pointX, float& pointY)
+void Ball::setGXYScale (float gXscale, float gYscale)
 {
-	float lightDirectionX = lightSourceX - _x;
-	float lightDirectionY = lightSourceY - _y;
-	float lightDistance = sqrt(lightDirectionX*lightDirectionX + lightDirectionY*lightDirectionY);
-	lightDirectionX /= lightDistance;
-	lightDirectionY /= lightDistance;
-
-	pointX = _x + lightDirectionX * _scale*_radius*0.5;
-	pointY = _y + lightDirectionY * _scale*_radius*0.5;
+	_gXscale = gXscale;
+	_gYscale = gYscale;
 }
 
 float Ball::getX()

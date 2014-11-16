@@ -44,9 +44,6 @@ class Model {
 	GLint _translationUV;
 
 	// Uniform handle
-	GLint _offsetUV;
-
-	// Uniform handle
 	GLint _ballRadiusUV;
 
 	// Uniform handle
@@ -64,10 +61,8 @@ class Model {
 	//Data array
 	float _ballRadiusArr[BALLS_PER_CALL];
 
-	float _offsetArr[2*BALLS_PER_CALL];
-
 	// View port frame:
-	float _width, _height, _offsetX, _offsetY;
+	float _width, _height, _offsetX, _offsetY, _initWidth, _initHeight;
 
 public:
 	Model();
@@ -88,15 +83,23 @@ public:
 	void resize(int width, int height);
 	
 public:
-	void createRandomBall(int x, int y);
+	void createBall(int x, int y);
 
 private:
+
 	void generateCircleVertices(float* verticeArr, float center_location[NUM_OF_COORDS], float radius);
+
 	void calculateCollisions();
+
 	float calculateDist(float x0, float y0, float x1, float y1);
+
 	bool isColliding(Ball& ball1, Ball& ball2, float& distanceShortage);
-//private:
-//	void checkOverlapAndShrink()
+
+	void fillDataArrays(int i);
+
+	void setUniformHandles (int numInstances);
+
+	float computeLargestRadius(float newX, float newY);
 
 };
 

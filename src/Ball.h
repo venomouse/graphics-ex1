@@ -15,8 +15,8 @@
 
 class Ball
 {
-	float _x, _y, _dx, _dy, _radius, _scale;
-	float _color[3];
+	float _x, _y, _dx, _dy, _radius, _scale, _gXscale, _gYscale;
+	float _color[4];
 
 public:
 	Ball(float radius = INIT_RADIUS);
@@ -27,7 +27,7 @@ public:
 	void move();
 	void shrink(float radiusDiff);
 	void enlarge();
-	void calculateWhitePoint(float lightSourceX, float lightSourceY, float& pointX, float& pointY);
+	void setGXYScale (float gXscale, float gYscale);
 
 	float getDefaultRadius()	{	return _radius;}
 	float getCurrRadius()		{	return _scale*_radius;}
