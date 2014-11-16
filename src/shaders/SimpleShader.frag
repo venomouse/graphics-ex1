@@ -1,29 +1,19 @@
 #version 330
 
-#define CHECKER_SIZE  10
 uniform vec4 fillColor;
+uniform float lightRadius;
+uniform vec4 whitePoint;
 
 out vec4 outColor;
 
-
-//creates the checkered pattern 
-vec4 checker(vec4 fragCoord) {
-
-   	if (( int(fragCoord.x) % (2*CHECKER_SIZE) < CHECKER_SIZE && int(fragCoord.y) % (2*CHECKER_SIZE) >= CHECKER_SIZE) ||
-                        (    int(fragCoord.x) % (2*CHECKER_SIZE) >= CHECKER_SIZE && int(fragCoord.y) % (2*CHECKER_SIZE) < CHECKER_SIZE) )
-    {
-    	//colored checker
-        return fillColor;
-    }
-    else
-    {
-    	//black checker
-        return vec4(0.0f,0.0f,0.0f,1.0f);
-    }
+float distance_2D(vec4 p1, vec4 p2)
+{
+	return sqrt((p1.x-p2.x)*(p1.x-p2.x) + (p1.y-p2.y)*(p1.y-p2.y));
 }
 
 void main()
 {
-	outColor = fillColor;
+	float intensity = (distance_2D(gl_FragCoord, whitePoint) > lightRadius) ? 0.5 : 1;
+	outColor = intensity*fillColor;
 }
 

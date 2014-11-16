@@ -72,11 +72,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Ball.cpp" />
     <ClCompile Include="src\ex0.cpp" />
     <ClCompile Include="src\Model.cpp" />
     <ClCompile Include="src\ShaderIO.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Ball.h" />
     <ClInclude Include="src\ex0.h" />
     <ClInclude Include="src\Model.h" />
     <ClInclude Include="src\ShaderIO.h" />

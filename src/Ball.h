@@ -8,12 +8,12 @@
 #ifndef BALL_H_
 #define BALL_H_
 
-#define SPEED 0.05
+#define SPEED 0.03
 #define INIT_RADIUS	0.1
 
 class Ball
 {
-	float _x, _y, _dx, _dy, _radius;
+	float _x, _y, _dx, _dy, _radius, _scale;
 	float _color[3];
 
 public:
@@ -23,13 +23,18 @@ public:
 
 	void init();
 	void move();
+	void shrink(float radiusDiff);
+	void enlarge();
+	void calculateWhitePoint(float lightSourceX, float lightSourceY, float& pointX, float& pointY);
 
-	void setRadius(float radius);
-	float getRadius() {return _radius;}
+	float getDefaultRadius()	{	return _radius;}
+	float getCurrRadius()		{	return _scale*_radius;}
+	bool isFullSize()			{	return _scale == 1.0f;}
 
 	float getX();
 	float getY();
 	float* getColor();
+
 private:
 
 };

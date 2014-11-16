@@ -42,6 +42,12 @@ class Model {
 	// Uniform handle
 	GLint _translationUV;
 
+	// Uniform handle
+	GLint _whiteSpotUV;
+
+	//Uniform handle;
+	GLint _lightRadiusUV;
+
 	// View port frame:
 	float _width, _height, _offsetX, _offsetY;
 
@@ -66,11 +72,11 @@ public:
 public:
 	void createRandomBall(int x, int y);
 
-
 private:
 	void generateCircleVertices(float* verticeArr, float center_location[NUM_OF_COORDS], float radius);
+	void calculateCollisions();
 	float calculateDist(float x0, float y0, float x1, float y1);
-	bool isColliding(Ball ball1, Ball ball2);
+	bool isColliding(Ball& ball1, Ball& ball2, float& distanceShortage);
 //private:
 //	void checkOverlapAndShrink()
 
