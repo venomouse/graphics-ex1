@@ -9,6 +9,7 @@
 #include "Model.h"
 
 #include <assert.h>
+#include <cstring>
 #include <GL/glew.h>
 #ifdef __APPLE__
 #include <OpenGL/OpenGL.h>
@@ -59,9 +60,11 @@ void Model::init()
 	_fillColorUV  = glGetUniformLocation(program, "fillColor");
 	_translationUV = glGetUniformLocation(program, "translation");
 	_scaleUV = glGetUniformLocation(program, "scale");
-	_whiteSpotUV = glGetUniformLocation(program, "whitePoint");
-	_lightRadiusUV = glGetUniformLocation(program, "lightRadius");
+	_ballRadiusUV = glGetUniformLocation(program, "ballRadius");
+	_windowSizeUV = glGetUniformLocation(program, "windowSize");
+	_offsetUV = glGetUniformLocation(program, "centerOffset");
 
+	
 	// Initialize vertices buffer and transfer it to OpenGL
 	{
 		//the circle should be in the middle of the window		
@@ -185,33 +188,50 @@ void Model::draw()
 	glBindVertexArray(_vao);
 	
 	size_t numberOfVertices = VERTICES_IN_PERIMETER+2;
-	
+
+	glUniform2f(_windowSizeUV,_width, _height );	
+
 	for (int i = 0; i < _numOfBalls; i++)
 	{
 		float scale = _balls[i].getCurrRadius()/DEFAULT_RADIUS;
-		float whitePointX = 0 , whitePointY = 0;
-		_balls[i].calculateWhitePoint(lightSourceX, lightSourceY, whitePointX, whitePointY);
-		whitePointX = whitePointX*0.5*_width + 0.5*_width;
-		whitePointY = - whitePointY*0.5*_height + 0.5*_height;
-
-		//for testing purposes
-		float imageX = _balls[i].getX()*0.5*_width + 0.5*_width;
-		float imageY = - _balls[i].getY()*0.5*_height + 0.5*_height;
-		float imageRadius = _balls[i].getCurrRadius()*_width*0.5;
-
+	
 		float scaleMatrix[] = {scale, 0.0, 0.0, 0.0,
 		                     0.0, scale, 0.0, 0.0,
 		                     0.0, 0.0, 1.0, 0.0,
 		                     0.0, 0.0, 0.0, 1.0};
-		//TODO remove
-//		std::cout << " Ball " << i << " scale " << scale << " radius "  << _balls[i].getRadius() << std::endl;
-		glUniform4f(_fillColorUV, _balls[i].getColor()[0], _balls[i].getColor()[1], _balls[i].getColor()[2], 1.0);
-		glUniform4f(_translationUV, _balls[i].getX(), _balls[i].getY(),0.0, 0.0);
-		glUniformMatrix4fv(_scaleUV, 1, false, scaleMatrix);
-		glUniform4f(_whiteSpotUV, whitePointX, whitePointY, 0.0, 0.0);
-		glUniform1f(_lightRadiusUV, _balls[i].getCurrRadius()*0.5*_width/2);
+	
+		int ind = i % BALLS_PER_CALL;
+		_fillColorArr[4*ind] = _balls[i].getColor()[0];
+		_fillColorArr[4*ind + 1] =  _balls[i].getColor()[1];
+		_fillColorArr[4*ind + 2] =  _balls[i].getColor()[2];
+		_fillColorArr[4*ind + 3] = 1.0;
 
-		glDrawArrays(GL_TRIANGLE_FAN, 0, numberOfVertices);
+
+
+		memcpy(_scaleArr + 16*ind, scaleMatrix, sizeof(scaleMatrix));
+
+		_translationArr[4*ind] = _balls[i].getX();
+		_translationArr[4*ind+1] = _balls[i].getY();
+		_translationArr[4*ind+2] = 0.0;
+		_translationArr[4*ind+3] = 0.0;
+
+		_ballRadiusArr[ind] = _balls[i].getCurrRadius();
+
+		_offsetArr[2*ind] = _balls[i].getX();
+		_offsetArr[2*ind+1] = _balls[i].getY();
+
+
+		if ((i % BALLS_PER_CALL == 0 && i > 0) || i == _numOfBalls - 1 )
+		{
+			int numInstances = (i == _numOfBalls - 1) ? _numOfBalls % BALLS_PER_CALL : BALLS_PER_CALL;
+	     	glUniform4fv(_fillColorUV, numInstances, _fillColorArr);
+			glUniform4fv(_translationUV, numInstances, _translationArr);
+			glUniformMatrix4fv(_scaleUV, numInstances, false, _scaleArr);
+			glUniform1fv(_ballRadiusUV, numInstances, _ballRadiusArr);
+			glUniform2fv(_offsetUV, numInstances, _offsetArr);
+
+			glDrawArraysInstanced(GL_TRIANGLE_FAN, 0, numberOfVertices, numInstances);
+		}
 	}
 
 	// Unbind the Vertex Array object

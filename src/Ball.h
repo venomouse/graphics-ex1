@@ -8,6 +8,8 @@
 #ifndef BALL_H_
 #define BALL_H_
 
+#include <math.h>
+
 #define SPEED 0.03
 #define INIT_RADIUS	0.1
 

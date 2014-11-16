@@ -18,6 +18,7 @@
 #include <math.h>
 
 #define MAX_NUM_BALLS 100
+#define BALLS_PER_CALL 10
 
 class Model {
 	
@@ -43,10 +44,27 @@ class Model {
 	GLint _translationUV;
 
 	// Uniform handle
-	GLint _whiteSpotUV;
+	GLint _offsetUV;
 
-	//Uniform handle;
-	GLint _lightRadiusUV;
+	// Uniform handle
+	GLint _ballRadiusUV;
+
+	// Uniform handle
+	GLint _windowSizeUV;
+
+	//Data array
+	float _fillColorArr[4*BALLS_PER_CALL];
+	
+	//Data array
+	float _scaleArr[BALLS_PER_CALL*16];
+
+	//Data array
+	float _translationArr[4*BALLS_PER_CALL];
+
+	//Data array
+	float _ballRadiusArr[BALLS_PER_CALL];
+
+	float _offsetArr[2*BALLS_PER_CALL];
 
 	// View port frame:
 	float _width, _height, _offsetX, _offsetY;
