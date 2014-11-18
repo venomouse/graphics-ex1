@@ -15,7 +15,12 @@
 
 class Ball
 {
-	float _x, _y, _dx, _dy, _radius, _scale, _gXscale, _gYscale;
+
+	float _x, _y, //center location
+		_dx, _dy, //speed
+		_radius, //radius at creation
+		_scale, // relative to initial size
+		_gXscale, _gYscale;
 	float _color[4];
 
 public:
@@ -24,18 +29,24 @@ public:
 	virtual ~Ball();
 
 	void init();
+	//update the ball's center position and speed
 	void move();
+	//shrink the ball in case of collision
 	void shrink(float radiusDiff);
+	//enlarge the shrinked ball at a steady rate
 	void enlarge();
+
 	void setGXYScale (float gXscale, float gYscale);
 
+
+	//Getters
 	float getDefaultRadius()	{	return _radius;}
 	float getCurrRadius()		{	return _scale*_radius;}
 	bool isFullSize()			{	return _scale == 1.0f;}
 
-	float getX();
-	float getY();
-	float* getColor();
+	float getX()				{	return _x;} 
+	float getY()				{	return _y;}
+	float* getColor()			{	return _color;}			
 
 private:
 

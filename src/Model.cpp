@@ -22,7 +22,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include "glm/gtc/matrix_transform.hpp"
 
-#define SHADERS_DIR                 "shaders/" // "C:\\Users\\Maria\\Documents\\Visual Studio 2010\\Projects\\graphics-ex1\\src\\shaders\\"
+#define SHADERS_DIR                 "shaders/" // "C:\\Users\\Maria\\Documents\\GitHub\\graphics-ex1\\src\\shaders\\"
 #define DEGREES_IN_CIRCLE           360
 #define VERTICES_IN_PERIMETER		DEGREES_IN_CIRCLE*1 //must be a factor of number of degrees in a full circle
 //TODO not to do this twice!
@@ -34,7 +34,7 @@ const float lightSourceX = 1.5f;
 const float lightSourceY = 1.5f;
 
 Model::Model() :
-_vao(0), _vbo(0), _numOfBalls(0)
+_vao(0), _vbo(0), _numOfBalls(0), _verticesInPerimeter(VERTICES_IN_PERIMETER)
 {
 
 }
@@ -78,7 +78,7 @@ void Model::init()
 		float radius = DEFAULT_RADIUS;
 
 		//fill the vertices array for triangle_fan object
-		generateCircleVertices(vertices, center, radius);
+		generateCircleVertices(vertices, center, radius, _verticesInPerimeter);
 
 		//fill in the first ball
 		_balls[0] = Ball(0,0);
@@ -112,7 +112,7 @@ void Model::init()
 }
 
 
-void Model::generateCircleVertices(float* verticeArr, float center_location[NUM_OF_COORDS], float radius)
+void Model::generateCircleVertices(float* verticeArr, float center_location[NUM_OF_COORDS], float radius, int verticesInPerimeter)
 {
 	//initializing the center
 	for (int coordNum = X; coordNum < NUM_OF_COORDS; coordNum++)
@@ -128,7 +128,7 @@ void Model::generateCircleVertices(float* verticeArr, float center_location[NUM_
 			verticeArr[numTriangle*NUM_OF_COORDS + coordNum] = center_location[coordNum];
 		}
 		//we offset the X and Y of each point to the needed direction from the circle center
-		float deg = (numTriangle-1)*DEGREES_IN_CIRCLE/VERTICES_IN_PERIMETER;
+		float deg = (numTriangle-1)*DEGREES_IN_CIRCLE/verticesInPerimeter;
 		verticeArr[numTriangle*NUM_OF_COORDS + X] += radius*cos(deg*M_PI/180.0f);
 		verticeArr[numTriangle*NUM_OF_COORDS + Y] += radius*sin(deg*M_PI/180.0f);
 	}
@@ -164,6 +164,7 @@ void Model::calculateCollisions()
 	}
 }
 
+
 float Model::calculateDist(float x0, float y0, float x1, float y1)
 {
 	return sqrt((x0 - x1) * (x0 - x1) + (y0 - y1) * (y0 - y1) );
@@ -196,7 +197,7 @@ void Model::draw()
 	glBindVertexArray(_vao);
 	
 	//-------------------------------------------NEW CODE------------------------------------//
-	size_t numberOfVertices = VERTICES_IN_PERIMETER+2;
+	size_t numberOfVertices = _verticesInPerimeter+2;
 
 	glUniform2f(_windowSizeUV,_width, _height );	
 
@@ -233,9 +234,10 @@ void Model::fillDataArrays(int i)
 
 	float gScaleX = _width/_initWidth;
 	float gScaleY = _height/_initHeight;
+	float radScale = std::min(gScaleX, gScaleY);
 
-	float scaleMatrix[] = {scale/gScaleX, 0.0, 0.0, 0.0,
-			0.0, scale/gScaleY, 0.0, 0.0,
+	float scaleMatrix[] = {scale*radScale/gScaleX, 0.0, 0.0, 0.0,
+			0.0, scale*radScale/gScaleY, 0.0, 0.0,
 			0.0, 0.0, 1.0, 0.0,
 			0.0, 0.0, 0.0, 1.0};
 
@@ -276,6 +278,26 @@ void Model::resize(int width, int height)
     _height = height;
     _offsetX = 0;
     _offsetY = 0;
+
+	//if the window size changed significantly, we reduce the amount of drawn vertices
+	if (_width/_initWidth < 0.5 || _height / _initHeight < 0.5)
+	{
+		//diminish the number of vertices
+		int factor = (int)std::min (_initWidth/_width, _initHeight/_height);
+		_verticesInPerimeter = (int)VERTICES_IN_PERIMETER/factor;
+
+		float vertices[(VERTICES_IN_PERIMETER+2)*NUM_OF_COORDS];
+		float radius = DEFAULT_RADIUS;
+		float center[] = {
+			0.0f, 0.0f, 0.0f, 1.0f,
+		};
+
+		//fill the vertices array for triangle_fan object
+		generateCircleVertices(vertices, center, radius, _verticesInPerimeter);
+
+		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+	}
 }
 
 void Model::createBall(int x, int y)

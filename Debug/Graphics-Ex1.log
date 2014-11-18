@@ -1,34 +1,37 @@
-﻿Build started 11/17/2014 1:04:15 AM.
-     1>Project "C:\Users\Maria\Documents\Visual Studio 2010\Projects\graphics-ex1\Graphics-Ex1.vcxproj" on node 2 (build target(s)).
+﻿Build started 11/18/2014 3:53:24 PM.
+     1>Project "C:\Users\Maria\Documents\GitHub\graphics-ex1\Graphics-Ex1.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\Graphics-Ex1.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\Users\Maria\Documents\Visual Studio 2010\Projects\graphics-ex1\src\shaders" /I"C:\Users\Maria\Documents\Visual Studio 2010\VC\Glew_glut\include" /Zi /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D NOMINMAX /D _USE_MATH_DEFINES /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt src\Model.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\Users\Maria\Documents\Visual Studio 2010\Projects\graphics-ex1\src\shaders" /I"C:\Users\Maria\Documents\Visual Studio 2010\VC\Glew_glut\include" /Zi /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D NOMINMAX /D _USE_MATH_DEFINES /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt src\Ball.cpp src\Model.cpp
          Model.cpp
-     1>src\Model.cpp(74): warning C4305: 'initializing' : truncation from 'double' to 'float'
-     1>src\Model.cpp(123): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
-     1>src\Model.cpp(124): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
-     1>src\Model.cpp(125): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
-     1>src\Model.cpp(143): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>src\Model.cpp(147): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>src\Model.cpp(151): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>src\Model.cpp(152): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>src\Model.cpp(191): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>src\Model.cpp(194): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>src\Model.cpp(195): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>src\Model.cpp(198): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>src\Model.cpp(199): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>src\Model.cpp(200): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>src\Model.cpp(212): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
-     1>src\Model.cpp(234): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>src\Model.cpp(235): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>src\Model.cpp(242): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>src\Model.cpp(243): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>src\Model.cpp(248): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>src\Model.cpp(66): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>src\Model.cpp(67): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>src\Model.cpp(78): warning C4305: 'initializing' : truncation from 'double' to 'float'
+     1>src\Model.cpp(131): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
+     1>src\Model.cpp(132): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+     1>src\Model.cpp(133): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+     1>src\Model.cpp(159): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>src\Model.cpp(160): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>src\Model.cpp(233): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>src\Model.cpp(277): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>src\Model.cpp(278): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>src\Model.cpp(288): warning C4305: 'initializing' : truncation from 'double' to 'float'
+     1>src\Model.cpp(303): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>src\Model.cpp(304): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>src\Model.cpp(323): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>src\Model.cpp(329): warning C4305: 'initializing' : truncation from 'double' to 'float'
+         Ball.cpp
+     1>src\Ball.cpp(35): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>src\Ball.cpp(36): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>src\Ball.cpp(37): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>src\Ball.cpp(38): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>src\Ball.cpp(39): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+         Generating Code...
        ManifestResourceCompile:
          All outputs are up-to-date.
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Maria\Documents\Visual Studio 2010\Projects\graphics-ex1\Debug\Graphics-Ex1.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\Maria\Documents\Visual Studio 2010\VC\Glew_glut\lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib glew32.lib glew32s.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\Graphics-Ex1.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Maria\Documents\Visual Studio 2010\Projects\graphics-ex1\Debug\Graphics-Ex1.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"mainCRTStartup" /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Maria\Documents\Visual Studio 2010\Projects\graphics-ex1\Debug\Graphics-Ex1.lib" /MACHINE:X86 "Debug\Graphics-Ex1.exe.embed.manifest.res"
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Maria\Documents\GitHub\graphics-ex1\Debug\Graphics-Ex1.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\Maria\Documents\Visual Studio 2010\VC\Glew_glut\lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib glew32.lib glew32s.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\Graphics-Ex1.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Maria\Documents\GitHub\graphics-ex1\Debug\Graphics-Ex1.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"mainCRTStartup" /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Maria\Documents\GitHub\graphics-ex1\Debug\Graphics-Ex1.lib" /MACHINE:X86 "Debug\Graphics-Ex1.exe.embed.manifest.res"
          Debug\Ball.obj
          Debug\ex0.obj
          Debug\Model.obj
@@ -38,12 +41,12 @@
          All outputs are up-to-date.
        LinkEmbedManifest:
          All outputs are up-to-date.
-         Graphics-Ex1.vcxproj -> C:\Users\Maria\Documents\Visual Studio 2010\Projects\graphics-ex1\Debug\Graphics-Ex1.exe
+         Graphics-Ex1.vcxproj -> C:\Users\Maria\Documents\GitHub\graphics-ex1\Debug\Graphics-Ex1.exe
        FinalizeBuildStatus:
          Deleting file "Debug\Graphics-Ex1.unsuccessfulbuild".
          Touching "Debug\Graphics-Ex1.lastbuildstate".
-     1>Done Building Project "C:\Users\Maria\Documents\Visual Studio 2010\Projects\graphics-ex1\Graphics-Ex1.vcxproj" (build target(s)).
+     1>Done Building Project "C:\Users\Maria\Documents\GitHub\graphics-ex1\Graphics-Ex1.vcxproj" (build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:01.32
+Time Elapsed 00:00:01.49

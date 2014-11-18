@@ -26,6 +26,7 @@ class Model {
 
 	GLuint _vao, _vbo;
 
+	//number of balls currently on the screen
 	int _numOfBalls;
 
 	Ball _balls[MAX_NUM_BALLS];
@@ -34,19 +35,19 @@ class Model {
 	// Attribute handle:
 	GLint _posAttrib;
 	
-	// Uniform handle:
+	// Uniform handle: the fill color of the ball
 	GLint _fillColorUV;
 	
-	// Uniform handle
+	// Uniform handle: the scale of the ball
 	GLint _scaleUV;
 
-	// Uniform handle
+	// Uniform handle: translation of the ball's center
 	GLint _translationUV;
 
-	// Uniform handle
+	// Uniform handle: the ball's absolute radius for lighting purposes
 	GLint _ballRadiusUV;
 
-	// Uniform handle
+	// Uniform handle: window size for lighting purposes
 	GLint _windowSizeUV;
 
 	//Data array
@@ -63,6 +64,8 @@ class Model {
 
 	// View port frame:
 	float _width, _height, _offsetX, _offsetY, _initWidth, _initHeight;
+
+	int _verticesInPerimeter;
 
 public:
 	Model();
@@ -87,19 +90,24 @@ public:
 
 private:
 
-	void generateCircleVertices(float* verticeArr, float center_location[NUM_OF_COORDS], float radius);
-
+	//compute the largest possible initial radius for a new ball
+	float computeLargestRadius(float newX, float newY);
+	//generates the vertices to be drawn
+	void generateCircleVertices(float* verticeArr, float center_location[NUM_OF_COORDS], float radius, int verticesInPerimeter);
+	// find if we need to shrink any ball before collisions
 	void calculateCollisions();
-
+	// helper function to calculate distance between two ball centers
 	float calculateDist(float x0, float y0, float x1, float y1);
-
+	// decides if ball1 and ball 2 are colliding
+	// distance shortage is the difference between the distance btw. the centers 
+	// and the some of radii of the two balls
 	bool isColliding(Ball& ball1, Ball& ball2, float& distanceShortage);
 
+	//fill the arrays with data from a specific ball, before calling glDrawArrayInstanced
 	void fillDataArrays(int i);
 
+	//Set the uniform variables, executed straight before drawing
 	void setUniformHandles (int numInstances);
-
-	float computeLargestRadius(float newX, float newY);
 
 };
 

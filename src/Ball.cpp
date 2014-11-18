@@ -74,19 +74,3 @@ void Ball::setGXYScale (float gXscale, float gYscale)
 	_gYscale = gYscale;
 }
 
-float Ball::getX()
-{
-	return _x;
-}
-
-float Ball::getY()
-{
-	return _y;
-}
-
-float* Ball::getColor()
-{
-	return _color;
-}
-
-
